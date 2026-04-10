@@ -12,9 +12,9 @@ class Cell  {
         Cell();
 
         // setters
-        void setPiece(PieceType);
-        void setColor(PieceColor);
-        void setOccupied(bool);
+        Cell& setPiece(PieceType);
+        Cell& setColor(PieceColor);
+        Cell& setOccupied(bool);
 
         // getters
         PieceColor getColor() const;
@@ -32,19 +32,19 @@ inline Cell :: Cell()  {
     this->occupied = false;
 }
 
-inline void Cell :: setPiece(PieceType piece)    {
+inline Cell& Cell :: setPiece(PieceType piece)    {
     this->piece = piece;
-    return;
+    return *this;
 }
 
-inline void Cell :: setColor(PieceColor color) {
+inline Cell& Cell :: setColor(PieceColor color) {
     this->color = color;
-    return;
+    return *this;
 }
 
-inline void Cell :: setOccupied(bool occupied) {
+inline Cell& Cell :: setOccupied(bool occupied) {
     this->occupied = occupied;
-    return;
+    return *this;
 }
 
 inline PieceColor Cell :: getColor()   const {
