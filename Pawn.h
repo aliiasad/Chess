@@ -15,7 +15,7 @@ class Pawn {
         PieceColor getColor() const;
 
         // legal move handling
-        Move* getLegalMove(int, int, const Board&, int&);
+        Move* getLegalMoves(int, int, const Board&, int&);
 };
 
 inline Pawn :: Pawn(PieceColor color)   {
@@ -26,7 +26,7 @@ inline PieceColor Pawn :: getColor() const {
     return color;
 }
 
-inline Move* Pawn :: getLegalMove(int row, int col, const Board& board, int& count) {
+inline Move* Pawn :: getLegalMoves(int row, int col, const Board& board, int& count) {
     Move* temp = new Move [4];
     count = 0;
 
@@ -53,12 +53,12 @@ inline Move* Pawn :: getLegalMove(int row, int col, const Board& board, int& cou
         }
     }
 
-    int captureCols[] = {col - 1, col + 1};
+    int captureCols[] = {-1, 1};
     for (int i = 0; i < 2; i++) {
         int captureRow = row + direction;
         int captureCol = col + captureCols[i];
 
-        if (captureRow >= 0 && captureCol >= 0 && captureCol <=7 && captureRow <= 7)    continue;
+        if (captureRow > 0 || captureCol > 0 || captureCol < 7 || captureRow < 7)    continue;
 
         const Cell& target = board.getCell(captureRow, captureCol);
         if (target.getOccupied() && target.getColor() != color) {
